@@ -3,3 +3,31 @@
 # Lines starting with # are comments, feel free to add any to document your commands
 
 # Please add your commands below this line
+
+#Set a breakpoint in our code to jump straight into the the function check_number. Your breakpoint should not be in check_password.
+break pwd_checker.c:59
+
+#Run the program. Your code should run until it gets to the breakpoint that we just set.
+run
+
+#Step into check_range.
+step
+step
+
+#Break on line 31 if the letter is '0'.
+break 31 if letter=='0'
+
+#Continue executing your code after it stops at a breakpoint.
+Continue
+
+#The code has stopped at the conditional breakpoint. To verify this, print letter.
+print(letter)
+
+# Print is_in_range. The result is false.
+print(is_in_range)
+
+#Let's look at the upper and lower bounds of the range. Print lower and upper.
+print(lower)
+print(upper)
+
+
