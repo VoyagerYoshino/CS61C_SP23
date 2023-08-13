@@ -38,7 +38,7 @@
       <a name="font" val="SansSerif plain 12"/>
     </tool>
   </lib>
-  <lib desc="file#..\ex3.circ" name="6"/>
+  <lib desc="file#../ex3.circ" name="6"/>
   <main name="main"/>
   <options>
     <a name="gateUndefined" val="ignore"/>
