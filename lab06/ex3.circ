@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<project source="3.8.0-61c.c58792e" version="1.0">
-  This file is intended to be loaded by Logisim-evolution v3.8.0-61c.c58792e(https://github.com/61c-teach/logisim-evolution).
+<project source="3.8.0-61c.fcfeffb" version="1.0">
+  This file is intended to be loaded by Logisim-evolution v3.8.0-61c.fcfeffb(https://github.com/61c-teach/logisim-evolution).
 
   <lib desc="#Wiring" name="0">
     <tool name="Splitter">
@@ -104,26 +104,37 @@
       <a name="output" val="true"/>
       <a name="width" val="8"/>
     </comp>
-    <comp lib="3" loc="(290,120)" name="Multiplier"/>
-    <comp lib="3" loc="(380,130)" name="Adder"/>
-    <comp lib="4" loc="(420,100)" name="Register">
+    <comp lib="3" loc="(260,120)" name="Multiplier"/>
+    <comp lib="3" loc="(420,130)" name="Adder"/>
+    <comp lib="4" loc="(290,40)" name="Register">
+      <a name="appearance" val="logisim_evolution"/>
+    </comp>
+    <comp lib="4" loc="(440,100)" name="Register">
       <a name="appearance" val="logisim_evolution"/>
     </comp>
     <wire from="(170,150)" to="(190,150)"/>
-    <wire from="(170,210)" to="(410,210)"/>
+    <wire from="(170,210)" to="(290,210)"/>
     <wire from="(170,90)" to="(190,90)"/>
-    <wire from="(190,110)" to="(250,110)"/>
+    <wire from="(190,110)" to="(220,110)"/>
     <wire from="(190,130)" to="(190,150)"/>
-    <wire from="(190,130)" to="(250,130)"/>
+    <wire from="(190,130)" to="(220,130)"/>
     <wire from="(190,90)" to="(190,110)"/>
-    <wire from="(290,120)" to="(340,120)"/>
-    <wire from="(330,140)" to="(330,230)"/>
-    <wire from="(330,140)" to="(340,140)"/>
-    <wire from="(330,230)" to="(520,230)"/>
-    <wire from="(380,130)" to="(420,130)"/>
+    <wire from="(260,120)" to="(270,120)"/>
+    <wire from="(270,70)" to="(270,120)"/>
+    <wire from="(270,70)" to="(290,70)"/>
+    <wire from="(290,110)" to="(290,210)"/>
+    <wire from="(290,210)" to="(410,210)"/>
+    <wire from="(290,70)" to="(300,70)"/>
+    <wire from="(350,70)" to="(370,70)"/>
+    <wire from="(360,140)" to="(360,230)"/>
+    <wire from="(360,140)" to="(380,140)"/>
+    <wire from="(360,230)" to="(520,230)"/>
+    <wire from="(370,120)" to="(380,120)"/>
+    <wire from="(370,70)" to="(370,120)"/>
     <wire from="(410,170)" to="(410,210)"/>
-    <wire from="(410,170)" to="(420,170)"/>
-    <wire from="(480,130)" to="(520,130)"/>
+    <wire from="(410,170)" to="(440,170)"/>
+    <wire from="(420,130)" to="(440,130)"/>
+    <wire from="(500,130)" to="(520,130)"/>
     <wire from="(520,130)" to="(520,230)"/>
     <wire from="(520,130)" to="(560,130)"/>
   </circuit>
