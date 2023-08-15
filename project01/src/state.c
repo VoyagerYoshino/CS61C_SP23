@@ -24,7 +24,40 @@ static void update_head(game_state_t* state, unsigned int snum);
 /* Task 1 */
 game_state_t* create_default_state() {
   // TODO: Implement this function.
-  return NULL;
+  game_state_t* default_state=(game_state_t*)malloc(sizeof(game_state_t));
+  default_state->num_rows=18;
+  
+  char first[21]="####################\0";
+  char other[21]="#                  #\0";
+  char **default_board=malloc(default_state->num_rows*sizeof(char*));
+  for(int i=0;i<default_state->num_rows;i++){
+    default_board[i]=(char*)malloc(21*sizeof(char*));
+  }
+  strcpy(default_board[0],first);
+  strcpy(default_board[17],first);
+  for(int i=1;i<17;i++){
+    strcpy(default_board[i],other);
+  }
+  
+  default_state->board=default_board;
+
+  default_state->num_snakes=1;
+
+  snake_t* default_snake=malloc(sizeof(default_state->num_snakes*sizeof(snake_t)));
+  default_snake[0].tail_row=2;
+  default_snake[0].tail_col=2;
+  default_snake[0].head_row=2;
+  default_snake[0].head_col=4;
+  default_snake[0].live=true;
+
+  default_state->snakes=default_snake;
+
+  set_board_at(default_state,default_snake[0].tail_row,default_snake[0].tail_col,'d');
+  set_board_at(default_state,2,3,'>');
+  set_board_at(default_state,default_snake[0].head_row,default_snake[0].head_col,'D');
+  set_board_at(default_state,2,9,'*');
+
+  return default_state;
 }
 
 /* Task 2 */
