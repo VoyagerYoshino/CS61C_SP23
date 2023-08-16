@@ -100,37 +100,127 @@ bool test_is_vowel() {
 
 bool test_is_tail() {
   // TODO: Implement this function.
+  char example='w';
+  if (!assert_true("Output_1",is_tail(example))){
+    return false;
+  }
+
+  char fexample='W';
+
+  if (!assert_false("Output_2",is_tail(fexample))){
+    return false;
+  }
+
   return true;
 }
 
 bool test_is_head() {
   // TODO: Implement this function.
-  return true;
+  char example='W';
+
+  if (!assert_true("Output_1",is_head(example))){
+    return false;
+  }
+
+  char fexample='X';
+
+  if (!assert_false("Output_2",is_head(fexample))){
+    return false;
+  }
+  return true;    
 }
 
 bool test_is_snake() {
-  // TODO: Implement this function.
-  return true;
+// TODO: Implement this function.
+  char example='<';
+  if (!assert_true("Output_1",is_snake(example))){
+    return false;
+  }
+
+  char fexample='X';
+
+  if (!assert_false("Output_2",is_snake(fexample))){
+    return false;
+  }
+
+  return true;  
 }
 
 bool test_body_to_tail() {
   // TODO: Implement this function.
-  return true;
+  char example='^';
+  char result='w';
+  if(!assert_equals_char("Output_1",result,body_to_tail(example))){
+    return false;
+  }
+
+  char fexample='w';
+  if(!assert_equals_char("Output_2",'?',body_to_tail(fexample))){
+    return false;
+  }
+
+  return true;  
 }
 
 bool test_head_to_body() {
   // TODO: Implement this function.
-  return true;
+  char result='>';
+  char example='D';
+  if(!assert_equals_char("Output_1",result,head_to_body(example))){
+    return false;
+  }
+
+
+  char fexample='X';
+
+  if(!assert_equals_char("Output_2",'?',head_to_body(fexample))){
+    return false;
+  } 
+  return true;  
 }
 
 bool test_get_next_row() {
   // TODO: Implement this function.
-  return true;
+  unsigned int current_row=3;
+  char example='S';
+  if(!assert_equals_unsigned_int("Output_1",4,get_next_row(current_row,example))){
+    return false;
+  }
+
+  char mexample='^';
+
+  if(!assert_equals_unsigned_int("Output_2",2,get_next_row(current_row,mexample))){
+    return false;   
+  }
+
+
+  char fexample='<';
+
+  if(!assert_equals_unsigned_int("Output_3",3,get_next_row(current_row,fexample))){
+    return false;
+  }
+  return true;    
 }
 
 bool test_get_next_col() {
   // TODO: Implement this function.
-  return true;
+  unsigned int current_col=5;
+  char example='>';
+  if(!assert_equals_unsigned_int("Output_1",6,get_next_col(current_col,example))){
+    return false;
+  }
+
+  char mexample='a';
+  if(!assert_equals_unsigned_int("Output_2",4,get_next_col(current_col,mexample))){
+    return false;
+  }
+
+
+  char fexample='v';
+  if(!assert_equals_unsigned_int("Output_3",5,get_next_col(current_col,fexample))){
+    return false;
+  }
+  return true;  
 }
 
 bool test_customs() {
