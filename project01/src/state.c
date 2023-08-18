@@ -31,7 +31,7 @@ game_state_t* create_default_state() {
   char other[21]="#                  #\0";
   char **default_board=malloc(default_state->num_rows*sizeof(char*));
   for(int i=0;i<default_state->num_rows;i++){
-    default_board[i]=(char*)malloc(21*sizeof(char*));
+    default_board[i]=(char*)malloc(21*sizeof(char));
   }
   strcpy(default_board[0],first);
   strcpy(default_board[17],first);
@@ -240,7 +240,19 @@ static unsigned int get_next_col(unsigned int cur_col, char c) {
 */
 static char next_square(game_state_t* state, unsigned int snum) {
   // TODO: Implement this function.
-  return '?';
+  unsigned int current_row=state->snakes[snum].head_row;
+  unsigned int current_col=state->snakes[snum].head_col;
+  
+  char head=get_board_at(state,current_row,current_col);
+  char next;
+  if (head=='W' || head=='S'){
+    unsigned int next_row=get_next_row(current_row,head);
+    next=get_board_at(state,next_row,current_col);
+  }else{
+    unsigned int next_col=get_next_col(current_col,head);
+    next=get_board_at(state,current_row,next_col);
+  }
+  return next;
 }
 
 /*
@@ -256,6 +268,21 @@ static char next_square(game_state_t* state, unsigned int snum) {
 */
 static void update_head(game_state_t* state, unsigned int snum) {
   // TODO: Implement this function.
+  unsigned int current_row=state->snakes[snum].head_row;
+  unsigned int current_col=state->snakes[snum].head_col;
+
+  char head=get_board_at(state,current_row,current_col);
+  set_board_at(state,current_row,current_col,head_to_body(head));
+
+  if (head=='W' || head=='S'){
+    unsigned int next_row=get_next_row(current_row,head);
+    set_board_at(state,next_row,current_col,head);
+    state->snakes[snum].head_row=next_row;
+  }else{
+    unsigned int next_col=get_next_col(current_col,head);
+    set_board_at(state,current_row,next_col,head);
+    state->snakes[snum].head_col=next_col;
+  }
   return;
 }
 
@@ -271,19 +298,107 @@ static void update_head(game_state_t* state, unsigned int snum) {
 */
 static void update_tail(game_state_t* state, unsigned int snum) {
   // TODO: Implement this function.
+  unsigned int current_row=state->snakes[snum].tail_row;
+  unsigned int current_col=state->snakes[snum].tail_col;
+
+  char tail=get_board_at(state,current_row,current_col);
+  set_board_at(state,current_row,current_col,' ');
+
+  if (tail=='w' || tail=='s'){
+    unsigned int next_row=get_next_row(current_row,tail);
+    char body=get_board_at(state,next_row,current_col);
+    set_board_at(state,next_row,current_col,body_to_tail(body));
+    state->snakes[snum].tail_row=next_row;
+  }else{
+    unsigned int next_col=get_next_col(current_col,tail);
+    char body=get_board_at(state,current_row,next_col);
+    set_board_at(state,current_row,next_col,body_to_tail(body));
+    state->snakes[snum].tail_col=next_col;
+  }
+
   return;
 }
 
 /* Task 4.5 */
 void update_state(game_state_t* state, int (*add_food)(game_state_t* state)) {
   // TODO: Implement this function.
+  for(unsigned int snum=0;snum<state->num_snakes;snum++){
+    char next=next_square(state,snum);
+    if (next=='#' || is_snake(next)){
+      set_board_at(state,state->snakes[snum].head_row,state->snakes[snum].head_col,'x');
+      state->snakes[snum].live=false;
+    }else if(next=='*'){
+      update_head(state,snum);
+      add_food(state);
+    }else{
+      update_head(state,snum);
+      update_tail(state,snum);
+    }
+  }
   return;
+}
+
+/*Conut number of line in given file*/
+unsigned int count_rows(char* filename){
+  FILE* file=fopen(filename, "r");
+  unsigned int rows=0;
+  int ch = fgetc(file);
+  while(ch != EOF){
+    if(ch == '\n'){
+      rows+=1;
+    }
+    ch = fgetc(file);
+  }
+  fclose(file);
+  return rows;
+}
+
+/*Count number of column in each line*/
+void count_columns(char* filename,unsigned int* array){
+  FILE* file=fopen(filename, "r");
+  unsigned int count=0;
+  int index=0;
+  int ch = fgetc(file);
+  while(ch != EOF){
+    count+=1;
+    if(ch == '\n'){
+      array[index]=count;
+      count=0;
+      index+=1;
+    }
+    ch = fgetc(file);
+  }
+  fclose(file);
 }
 
 /* Task 5 */
 game_state_t* load_board(char* filename) {
   // TODO: Implement this function.
-  return NULL;
+  FILE* file=fopen(filename, "r");
+  game_state_t* load=malloc(sizeof(game_state_t));
+  load->num_rows=count_rows(filename);
+
+  char** board=malloc(load->num_rows*sizeof(char*));
+  unsigned int array[load->num_rows];
+  count_columns(filename,array);
+  for (int i=0;i<load->num_rows;i++){
+    board[i]=malloc(array[i]*sizeof(char));
+  }
+  
+  for(int i=0;i<load->num_rows;i++){
+    for(int j=0;j<array[i];j++){
+      char ch=(char)fgetc(file);
+      if (ch=='\n'){
+        board[i][j]='\0';
+      }else{
+        board[i][j]=ch;
+      }
+    }
+  }
+  load->board=board;
+  load->snakes=NULL;
+  load->num_snakes=0;
+  return load;
 }
 
 /*
