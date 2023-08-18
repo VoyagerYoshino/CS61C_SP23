@@ -411,11 +411,56 @@ game_state_t* load_board(char* filename) {
 */
 static void find_head(game_state_t* state, unsigned int snum) {
   // TODO: Implement this function.
+  unsigned int current_row=state->snakes[snum].tail_row;
+  unsigned int current_col=state->snakes[snum].tail_col;
+  char current=get_board_at(state,current_row,current_col);
+  while (!is_head(current)){
+    current_row=get_next_row(current_row,current);
+    current_col=get_next_col(current_col,current);
+
+    current=get_board_at(state,current_row,current_col);
+  }
+  state->snakes[snum].head_row=current_row;
+  state->snakes[snum].head_col=current_col;
   return;
+}
+
+//get number of snakes at current state
+
+unsigned int get_snum(game_state_t* state){
+  unsigned int snum=0;
+   for(unsigned int current_row=0;current_row<state->num_rows;current_row++){
+    unsigned int current_col=0;
+    while(state->board[current_row][current_col]!='\0'){
+      if (is_tail(state->board[current_row][current_col])){
+        snum+=1;
+      }
+      current_col+=1;
+    }
+  }
+  return snum;
 }
 
 /* Task 6.2 */
 game_state_t* initialize_snakes(game_state_t* state) {
   // TODO: Implement this function.
-  return NULL;
+  state->num_snakes=get_snum(state);
+  snake_t* initial_snakes=malloc(state->num_snakes*sizeof(snake_t));
+  state->snakes=initial_snakes;
+  unsigned int snake_index=0;
+
+  for(unsigned int current_row=0;current_row<state->num_rows;current_row++){
+    unsigned int current_col=0;
+    while(state->board[current_row][current_col]!='\0'){
+      if (is_tail(state->board[current_row][current_col])){
+        initial_snakes[snake_index].tail_row=current_row;
+        initial_snakes[snake_index].tail_col=current_col;
+        initial_snakes[snake_index].live=true;
+        find_head(state,snake_index);
+        snake_index+=1;
+      }
+      current_col+=1;
+    }
+  }
+  return state;
 }
