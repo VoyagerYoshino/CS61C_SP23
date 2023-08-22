@@ -17,7 +17,6 @@
 argmax:
     bge x0,a1,Exceptions
     mv t0,x0
-    mv t1,x0
     mv,t4,x0           #argmax
     lw t3,0(a0)     #t3 maxvalue
 loop_start:

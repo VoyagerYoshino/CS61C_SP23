@@ -359,6 +359,7 @@ class TestMatmul(unittest.TestCase):
             [95, 110, 220, 260],
         )
 
+
     def test_matmul_nonsquare_2(self):
         self.doMatmul(
             [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
