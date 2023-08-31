@@ -372,7 +372,7 @@
       <a name="facing" val="east"/>
       <a name="label" val="BrLt"/>
     </comp>
-    <comp lib="0" loc="(1670,640)" name="Tunnel">
+    <comp lib="0" loc="(1670,630)" name="Tunnel">
       <a name="facing" val="east"/>
       <a name="label" val="BrLt"/>
     </comp>
@@ -1176,13 +1176,13 @@
     </comp>
     <comp lib="1" loc="(1730,280)" name="NOT Gate"/>
     <comp lib="1" loc="(1730,450)" name="NOT Gate"/>
-    <comp lib="1" loc="(1730,640)" name="NOT Gate"/>
+    <comp lib="1" loc="(1730,630)" name="NOT Gate"/>
     <comp lib="1" loc="(1790,220)" name="AND Gate"/>
     <comp lib="1" loc="(1790,300)" name="AND Gate"/>
     <comp lib="1" loc="(1790,380)" name="AND Gate"/>
     <comp lib="1" loc="(1790,470)" name="AND Gate"/>
     <comp lib="1" loc="(1790,560)" name="AND Gate"/>
-    <comp lib="1" loc="(1790,660)" name="AND Gate"/>
+    <comp lib="1" loc="(1790,650)" name="AND Gate"/>
     <comp lib="1" loc="(2140,530)" name="OR Gate">
       <a name="inputs" val="8"/>
     </comp>
@@ -1416,37 +1416,37 @@
 </a>
       <a name="dataWidth" val="16"/>
     </comp>
-    <comp lib="5" loc="(1123,707)" name="Text">
+    <comp lib="5" loc="(1120,705)" name="Text">
       <a name="font" val="SansSerif plain 12"/>
       <a name="text" val="jal"/>
     </comp>
-    <comp lib="5" loc="(1294,907)" name="Text">
+    <comp lib="5" loc="(1290,905)" name="Text">
       <a name="font" val="SansSerif plain 12"/>
       <a name="text" val="jalr"/>
     </comp>
-    <comp lib="5" loc="(1433,543)" name="Text">
+    <comp lib="5" loc="(1430,540)" name="Text">
       <a name="font" val="SansSerif plain 12"/>
       <a name="text" val="bltu30"/>
     </comp>
-    <comp lib="5" loc="(1434,629)" name="Text">
+    <comp lib="5" loc="(1430,625)" name="Text">
       <a name="font" val="SansSerif plain 12"/>
       <a name="text" val="bgeu31"/>
     </comp>
-    <comp lib="5" loc="(1436,452)" name="Text">
-      <a name="font" val="SansSerif plain 12"/>
-      <a name="text" val="bge29"/>
-    </comp>
-    <comp lib="5" loc="(1439,371)" name="Text">
+    <comp lib="5" loc="(1435,370)" name="Text">
       <a name="font" val="SansSerif plain 12"/>
       <a name="text" val="blt28"/>
     </comp>
-    <comp lib="5" loc="(1442,289)" name="Text">
+    <comp lib="5" loc="(1435,450)" name="Text">
       <a name="font" val="SansSerif plain 12"/>
-      <a name="text" val="bne27"/>
+      <a name="text" val="bge29"/>
     </comp>
-    <comp lib="5" loc="(1444,208)" name="Text">
+    <comp lib="5" loc="(1440,205)" name="Text">
       <a name="font" val="SansSerif plain 12"/>
       <a name="text" val="beq26"/>
+    </comp>
+    <comp lib="5" loc="(1440,285)" name="Text">
+      <a name="font" val="SansSerif plain 12"/>
+      <a name="text" val="bne27"/>
     </comp>
     <comp lib="5" loc="(170,90)" name="Text">
       <a name="text" val="INPUTS to your circuit"/>
@@ -1463,7 +1463,7 @@
     <comp lib="5" loc="(670,140)" name="Text">
       <a name="text" val="OUTPUT from your circuit"/>
     </comp>
-    <comp lib="5" loc="(993,359)" name="Text">
+    <comp lib="5" loc="(990,355)" name="Text">
       <a name="font" val="SansSerif plain 14"/>
       <a name="text" val="Reminder: If using ROM, use combinational logic for PCSel"/>
     </comp>
@@ -1580,7 +1580,7 @@
     <wire from="(1670,360)" to="(1740,360)"/>
     <wire from="(1670,450)" to="(1700,450)"/>
     <wire from="(1670,540)" to="(1740,540)"/>
-    <wire from="(1670,640)" to="(1700,640)"/>
+    <wire from="(1670,630)" to="(1700,630)"/>
     <wire from="(1680,200)" to="(1740,200)"/>
     <wire from="(1680,280)" to="(1700,280)"/>
     <wire from="(1710,1280)" to="(1770,1280)"/>
@@ -1588,7 +1588,7 @@
     <wire from="(1730,2570)" to="(1830,2570)"/>
     <wire from="(1730,280)" to="(1740,280)"/>
     <wire from="(1730,450)" to="(1740,450)"/>
-    <wire from="(1730,640)" to="(1740,640)"/>
+    <wire from="(1730,630)" to="(1740,630)"/>
     <wire from="(1770,1210)" to="(1770,1280)"/>
     <wire from="(1770,1210)" to="(1870,1210)"/>
     <wire from="(1770,1280)" to="(1770,1350)"/>
@@ -1612,7 +1612,7 @@
     <wire from="(1790,380)" to="(2050,380)"/>
     <wire from="(1790,470)" to="(2040,470)"/>
     <wire from="(1790,560)" to="(2040,560)"/>
-    <wire from="(1790,660)" to="(2050,660)"/>
+    <wire from="(1790,650)" to="(2050,650)"/>
     <wire from="(180,1640)" to="(260,1640)"/>
     <wire from="(180,430)" to="(350,430)"/>
     <wire from="(1830,1230)" to="(1870,1230)"/>
@@ -1642,7 +1642,7 @@
     <wire from="(2040,540)" to="(2090,540)"/>
     <wire from="(2050,380)" to="(2050,510)"/>
     <wire from="(2050,510)" to="(2090,510)"/>
-    <wire from="(2050,550)" to="(2050,660)"/>
+    <wire from="(2050,550)" to="(2050,650)"/>
     <wire from="(2050,550)" to="(2090,550)"/>
     <wire from="(2060,300)" to="(2060,500)"/>
     <wire from="(2060,500)" to="(2090,500)"/>
