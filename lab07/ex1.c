@@ -6,6 +6,7 @@
 long long int sum(int vals[NUM_ELEMS]) {
     clock_t start = clock();
 
+
     long long int sum = 0;
     for(unsigned int w = 0; w < OUTER_ITERATIONS; w++) {
         for(unsigned int i = 0; i < NUM_ELEMS; i++) {
@@ -53,8 +54,21 @@ long long int sum_simd(int vals[NUM_ELEMS]) {
 
     for(unsigned int w = 0; w < OUTER_ITERATIONS; w++) {
         /* YOUR CODE GOES HERE */
-
+        __m128i sum_vec=_mm_setzero_si128();
+        for(unsigned int i = 0; i < NUM_ELEMS/4*4; i+=4) {
+            __m128i current=_mm_loadu_si128((__m128i*) (vals+i));
+            __m128i maske=_mm_cmpgt_epi32(current,_127);
+            current=_mm_and_si128(maske,current);
+            sum_vec=_mm_add_epi32(sum_vec,current);
+        }
         /* Hint: you'll need a tail case. */
+        for(unsigned int i=NUM_ELEMS/4*4;i<NUM_ELEMS;i++){
+            sum_vec[0]+=vals[i];
+        }
+
+        int sum_arr[4];
+        _mm_store_si128((__m128i*)sum_arr,sum_vec);
+        result=result+sum_arr[0]+sum_arr[1]+sum_arr[2]+sum_arr[3];
     }
 
     /* DO NOT MODIFY ANYTHING BELOW THIS LINE (in this function) */
@@ -72,8 +86,45 @@ long long int sum_simd_unrolled(int vals[NUM_ELEMS]) {
     for(unsigned int w = 0; w < OUTER_ITERATIONS; w++) {
         /* YOUR CODE GOES HERE */
         /* Copy your sum_simd() implementation here, and unroll it */
+         __m128i sum_vec=_mm_setzero_si128();
+        for(unsigned int i = 0; i < NUM_ELEMS/16*16; i+=16) {
+            __m128i current_1=_mm_loadu_si128((__m128i*) (vals+i));
+            __m128i current_2=_mm_loadu_si128((__m128i*) (vals+i+4));
+            __m128i current_3=_mm_loadu_si128((__m128i*) (vals+i+8));
+            __m128i current_4=_mm_loadu_si128((__m128i*) (vals+i+12));
+
+            __m128i maske_1=_mm_cmpgt_epi32(current_1,_127);
+            __m128i maske_2=_mm_cmpgt_epi32(current_2,_127);
+            __m128i maske_3=_mm_cmpgt_epi32(current_3,_127);
+            __m128i maske_4=_mm_cmpgt_epi32(current_4,_127);
+
+
+            current_1=_mm_and_si128(maske_1,current_1);
+            current_2=_mm_and_si128(maske_2,current_2);
+            current_3=_mm_and_si128(maske_3,current_3);
+            current_4=_mm_and_si128(maske_4,current_4);
+
+            sum_vec=_mm_add_epi32(sum_vec,current_1);
+            sum_vec=_mm_add_epi32(sum_vec,current_2);
+            sum_vec=_mm_add_epi32(sum_vec,current_3);
+            sum_vec=_mm_add_epi32(sum_vec,current_4);
+        }
 
         /* Hint: you'll need 1 or maybe 2 tail cases here. */
+        for(unsigned int i=NUM_ELEMS/16*16;i<NUM_ELEMS/4*4;i+=4){
+            __m128i tail_current=_mm_loadu_si128((__m128i*) (vals+i));
+            __m128i tail_maske=_mm_cmpgt_epi32(tail_current,_127);
+            tail_current=_mm_and_si128(tail_maske,tail_current);
+            sum_vec=_mm_add_epi32(sum_vec,tail_current);
+        }
+
+        for(unsigned int i=NUM_ELEMS/4*4;i<NUM_ELEMS;i++){
+            sum_vec[0]+=vals[i];
+        }
+
+        int sum_arr[4];
+        _mm_store_si128((__m128i*)sum_arr,sum_vec);
+        result=result+sum_arr[0]+sum_arr[1]+sum_arr[2]+sum_arr[3];
     }
 
     /* DO NOT MODIFY ANYTHING BELOW THIS LINE (in this function) */
